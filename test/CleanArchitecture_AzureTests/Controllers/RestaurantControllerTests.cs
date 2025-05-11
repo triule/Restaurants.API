@@ -12,6 +12,7 @@ using Microsoft.Extensions.DependencyInjection.Extensions;
 using Restaurants.Domain.Entities;
 using System.Net.Http.Json;
 using Restaurants.Application.Restaurant.Dtos;
+using Restaurants.Infrastructure.Seeders;
 
 namespace CleanArchitecture_Azure.Controllers.Tests
 {
@@ -19,6 +20,8 @@ namespace CleanArchitecture_Azure.Controllers.Tests
     {
         private readonly WebApplicationFactory<Program> _applicationFactory;
         private readonly Mock<IRestaurantRepository> _restaurantRepositoryMock = new();
+        private readonly Mock<IRestaurantSeeder> _restaurantsSeederMock = new();
+
         public RestaurantControllerTests(WebApplicationFactory<Program> factory)
         {
             _applicationFactory = factory.WithWebHostBuilder(builder => {
@@ -26,6 +29,9 @@ namespace CleanArchitecture_Azure.Controllers.Tests
                 {
                     services.AddSingleton<IPolicyEvaluator, FakePolicyEvaluator>();
                     services.Replace(ServiceDescriptor.Scoped(typeof(IRestaurantRepository), _ => _restaurantRepositoryMock.Object));
+
+                    services.Replace(ServiceDescriptor.Scoped(typeof(IRestaurantSeeder), _ => _restaurantRepositoryMock.Object));
+
                 });
             });
         }
@@ -78,7 +84,7 @@ namespace CleanArchitecture_Azure.Controllers.Tests
             var client= _applicationFactory.CreateClient();
 
             // act
-            var result = await client.GetAsync("/api/restaurants?pageNumber=1&pageSie=10");
+            var result = await client.GetAsync("/api/restaurants?pageNumber=1&pageSize=10");
 
             // assert
             result.StatusCode.Should().Be(System.Net.HttpStatusCode.OK);
