@@ -1,0 +1,109 @@
+@host = http://localhost
+@port = 5186
+@token = CfDJ8ANDW0Cg-R9PmM3npchzPiitN58jFzQRxqI0e-mCSAd_Wno9_WDvla5K-_Ge84QxB3vi_rf3Dc-7e3PfKTGzM15JBXLuYpl-IOpKwl-5z-zIUbyThvD_MtereAGFJ-KxO5Bt84knJghCXdxcKqdCxUj4MBSeV9ZaB5xifbY5-G4_GOhVe3QvbAHZQzJF-2OWPE1_-UTH-6qjbzDmSvh0VMSEREAJ5LiYCtAjXfUTURSDOxNYJhnu_M2yRXkzcvVXW5frx2_T1LwLvTj-U1gwbXvxE_il5G5N827LE5iN-hYmOiEJ6EZXKydL7azoqhXiPnvkI-FAB9r8jZvdFsK0KCz03PJbj8-6Fx8gDbBg5F_MSXAVzmBb5HwJdadZP-OtYV74XBHcCPOgebTwRCC82EEHy6S3GOskjlyjSdmbIHVgcbfCXKKX5rISe0B2UsIi2tzCsJAU8q6t2jw3L7wYhulycRDLdPlFSJ9wTDu0eTbOifakaVrFmOkP_DCQqoXZ3guTwKyLe5l6aD06vn2HQFYDKYAKsgcSQQxuSL_J6VmZb7HrY2SFtZuBWn0Ap2f6bHxZd4UrPUWeT7CUFWo6b3kLPDuWmuzJIszpe9xFtTy2o9Im2LJnFI2Ii5Q5BNNlXD_wHBa8ONWGoj0JL5zNixWJ-aw0DhDQi8oeQH1O0wosyUEsQQPeCyneKEyxwobMdHBwfCgjklttmi5yDGbz9PZ2Bzgawr2wOQMe8xvBhcqm3AnJlSfFM-ECQYmPcZzh6TL7MN4IIkOLIOcBcqv8fvCbsI6YRbcOCvTQiUItwiGo
+@CleanArchitecture_Azure_HostAddress = https://localhost:7154
+
+
+###
+
+GET {{CleanArchitecture_Azure_HostAddress}}/api/restaurants?searchPhrase=&pageSize=5&pageNumber=1&sortBy=Name&sortDirecion=Descending
+Authorization: Bearer {{token}}
+
+###
+
+GET {{CleanArchitecture_Azure_HostAddress}}/api/restaurants/2
+Authorization: Bearer {{token}}
+
+###
+POST {{CleanArchitecture_Azure_HostAddress}}/api/restaurants
+Content-Type: application/json
+Accept: application/json
+Authorization: Bearer {{token}}
+
+{
+    "Name": "Owner2 Restaurant 2",
+    "Description": "Italian 3",
+    "Category": "Italian",
+    "HasDelivery": true,
+    "ContactEmail": "pizza2@gmail.com",
+    "ContactNumber": "0903357103",
+    "City": "Metropolis 3",
+    "Street": "ACC Street 3",
+    "PostalCode": "41-115-3"
+}
+
+###
+
+DELETE {{CleanArchitecture_Azure_HostAddress}}/api/restaurants/4002
+Authorization: Bearer {{token}}
+
+###
+
+PATCH {{CleanArchitecture_Azure_HostAddress}}/api/restaurants/3002
+Accept: application/json
+Content-Type: application/json
+Authorization: Bearer {{token}}
+{
+    "Name": "Updated Alacarte",
+    "Description": "New",
+    "HasDelivery": false
+}
+
+###
+
+POST {{CleanArchitecture_Azure_HostAddress}}/api/restaurant/2/dishes
+Content-Type: application/json
+{
+  "Name": "Spaghetti",
+  "Description": "Dish from Italia",
+  "Price": 12.99,
+  "KiloCalories": 220
+}
+
+###
+
+GET {{CleanArchitecture_Azure_HostAddress}}/api/restaurant/2/dishes
+Authorization: Bearer {{token}}
+###
+
+DELETE {{CleanArchitecture_Azure_HostAddress}}/api/restaurant/29/dishes
+
+###
+
+POST {{CleanArchitecture_Azure_HostAddress}}/api/identity/register
+Content-Type: application/json
+{
+    "email":"owner2@gmail.com",
+    "password":"Quangtrieu090535@"
+}
+
+###
+POST {{CleanArchitecture_Azure_HostAddress}}/api/identity/login
+Content-Type: application/json
+{
+    "email":"owner2@gmail.com",
+    "password":"Quangtrieu090535@"
+}
+
+###
+
+PATCH {{CleanArchitecture_Azure_HostAddress}}/api/identity/user
+Content-Type: application/json
+Authorization: Bearer {{token}}
+{
+  "Nationality" : "Vietnam",
+  "DateOfBirth" : "2018-06-22"
+}
+
+###
+
+POST {{CleanArchitecture_Azure_HostAddress}}/api/identity/userRole
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "UserEmail" : "owner2@gmail.com",
+  "RoleName" : "Owner"
+}
+
+###
