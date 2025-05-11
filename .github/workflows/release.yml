@@ -40,5 +40,5 @@ jobs:
         uses: Azure/webapps-deploy@v3.0.1
         with:
           app-name: 'api-restaurants-dev'
-          pulish-profile: ${{ secrets.PUBLISH_PROFILE_DEV }}
+          publish-profile: ${{ secrets.PUBLISH_PROFILE_DEV }}
         
