@@ -21,6 +21,7 @@ namespace CleanArchitecture_Azure.Controllers.Tests
         private readonly WebApplicationFactory<Program> _applicationFactory;
         private readonly Mock<IRestaurantRepository> _restaurantRepositoryMock = new();
         private readonly Mock<IRestaurantSeeder> _restaurantsSeederMock = new();
+        private readonly HttpClient _client;
 
         public RestaurantControllerTests(WebApplicationFactory<Program> factory)
         {
@@ -30,7 +31,7 @@ namespace CleanArchitecture_Azure.Controllers.Tests
                     services.AddSingleton<IPolicyEvaluator, FakePolicyEvaluator>();
                     services.Replace(ServiceDescriptor.Scoped(typeof(IRestaurantRepository), _ => _restaurantRepositoryMock.Object));
 
-                    services.Replace(ServiceDescriptor.Scoped(typeof(IRestaurantSeeder), _ => _restaurantRepositoryMock.Object));
+                    services.Replace(ServiceDescriptor.Scoped(typeof(IRestaurantSeeder), _ => _restaurantsSeederMock.Object));
 
                 });
             });
